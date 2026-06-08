@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    width:1320px; height:2868px;
+    background:linear-gradient(160deg,#0A0A0F 0%,#1A0F2E 50%,#0A0A0F 100%);
+    font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;
+    overflow:hidden; position:relative;
+  }
+  .bg-circle{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.15;}
+
+  .headline{position:absolute;top:140px;left:0;right:0;text-align:center;}
+  .headline h1{font-size:88px;font-weight:800;color:#fff;letter-spacing:-2px;line-height:1.05;}
+  .headline h1 span{color:#7B61FF;}
+  .headline p{margin-top:28px;font-size:44px;color:rgba(255,255,255,0.5);}
+
+  .phone{
+    position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);
+    width:780px;height:1680px;background:#1a1a1a;border-radius:88px;
+    box-shadow:0 0 0 10px #2a2a2a,0 0 0 14px #111,
+      0 80px 200px rgba(0,0,0,0.9),0 0 120px rgba(123,97,255,0.2);
+  }
+  .phone-screen{
+    position:absolute;top:20px;left:20px;right:20px;bottom:20px;
+    border-radius:72px;overflow:hidden;background:#0A0A0F;
+  }
+  .island{
+    position:absolute;top:18px;left:50%;transform:translateX(-50%);
+    width:200px;height:44px;background:#000;border-radius:22px;z-index:10;
+  }
+
+  /* Paywall content */
+  .pw-top{
+    position:absolute;top:70px;left:0;right:0;text-align:center;padding:0 40px;
+  }
+  .pw-eyebrow{
+    color:rgba(255,255,255,0.4);font-size:22px;font-weight:600;letter-spacing:3px;
+    margin-bottom:20px;
+  }
+  .pw-title{font-size:56px;font-weight:800;color:#fff;line-height:1.1;letter-spacing:-1px;}
+  .pw-title span{color:#7B61FF;}
+  .pw-sub{margin-top:16px;font-size:28px;color:rgba(255,255,255,0.5);line-height:1.4;}
+
+  /* Eye icon */
+  .eye-wrap{
+    position:absolute;top:360px;left:50%;transform:translateX(-50%);
+    width:180px;height:180px;
+  }
+  .eye-outer{
+    width:180px;height:180px;border-radius:90px;
+    background:linear-gradient(135deg,#7B61FF,#A855F7,#7B61FF);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 60px rgba(123,97,255,0.6);
+  }
+  .eye-inner{
+    width:100px;height:100px;border-radius:50px;
+    background:#0A0A0F;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .eye-pupil{width:50px;height:50px;border-radius:25px;background:#7B61FF;}
+
+  /* Features */
+  .features{
+    position:absolute;top:580px;left:40px;right:40px;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .feature{
+    display:flex;align-items:center;gap:20px;
+    background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
+    border-radius:16px;padding:24px 28px;
+  }
+  .feat-icon{font-size:36px;width:52px;text-align:center;}
+  .feat-text{color:#F0EFF5;font-size:28px;font-weight:500;}
+  .feat-sub{color:rgba(255,255,255,0.4);font-size:22px;margin-top:2px;}
+
+  /* Pricing */
+  .pricing{
+    position:absolute;top:940px;left:40px;right:40px;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .plan-annual{
+    background:linear-gradient(135deg,rgba(123,97,255,0.25),rgba(168,85,247,0.2));
+    border:2px solid #7B61FF;border-radius:20px;
+    padding:32px 36px;
+    display:flex;justify-content:space-between;align-items:center;
+    box-shadow:0 8px 40px rgba(123,97,255,0.3);
+  }
+  .plan-best{
+    background:#7B61FF;border-radius:20px;padding:6px 18px;
+    color:#fff;font-size:22px;font-weight:700;margin-bottom:10px;display:inline-block;
+  }
+  .plan-name{color:#fff;font-size:32px;font-weight:700;}
+  .plan-price{color:#fff;font-size:44px;font-weight:800;text-align:right;}
+  .plan-period{color:rgba(255,255,255,0.6);font-size:24px;font-weight:400;}
+  .plan-save{color:#A5D8FF;font-size:22px;margin-top:4px;}
+
+  .plan-monthly{
+    background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);
+    border-radius:20px;padding:28px 36px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .plan-monthly .plan-name{color:rgba(255,255,255,0.7);}
+  .plan-monthly .plan-price{color:rgba(255,255,255,0.7);}
+
+  /* CTA */
+  .cta{
+    position:absolute;top:1260px;left:40px;right:40px;
+    background:#7B61FF;border-radius:20px;padding:38px;
+    text-align:center;color:#fff;font-size:34px;font-weight:700;
+    box-shadow:0 12px 50px rgba(123,97,255,0.5);
+  }
+  .restore{
+    position:absolute;top:1380px;left:0;right:0;text-align:center;
+    color:rgba(255,255,255,0.3);font-size:24px;
+  }
+</style>
+</head>
+<body>
+<div class="bg-circle" style="width:800px;height:800px;background:#7B61FF;top:-300px;left:50%;transform:translateX(-50%);"></div>
+<div class="bg-circle" style="width:500px;height:500px;background:#A855F7;bottom:300px;right:-100px;"></div>
+
+<div class="headline">
+  <h1>Unlock the full<br/><span>colour spectrum</span></h1>
+  <p>1 day free trial, then<br/>from just £2.99/month</p>
+</div>
+
+<div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+
+    <div class="pw-top">
+      <div class="pw-eyebrow">COLOUR BLIND — SEE COLOUR</div>
+      <div class="pw-title">See colour like you're <span>meant to.</span></div>
+      <div class="pw-sub">Unlimited photos · All correction types · Cloud sync</div>
+    </div>
+
+    <div class="eye-wrap">
+      <div class="eye-outer">
+        <div class="eye-inner">
+          <div class="eye-pupil"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feat-icon">📷</div>
+        <div>
+          <div class="feat-text">Live camera correction</div>
+          <div class="feat-sub">Real-time colour adjustment</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feat-icon">🖼</div>
+        <div>
+          <div class="feat-text">Unlimited photo imports</div>
+          <div class="feat-sub">See any image corrected</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feat-icon">✦</div>
+        <div>
+          <div class="feat-text">Memory bank</div>
+          <div class="feat-sub">Save & revisit every moment</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing">
+      <div class="plan-annual">
+        <div>
+          <div class="plan-best">BEST VALUE</div>
+          <div class="plan-name">Annual</div>
+          <div class="plan-save">Save 58% vs monthly</div>
+        </div>
+        <div style="text-align:right">
+          <div class="plan-price">£14.99</div>
+          <div class="plan-period">per year</div>
+        </div>
+      </div>
+      <div class="plan-monthly">
+        <div class="plan-name">Monthly</div>
+        <div>
+          <div class="plan-price">£2.99</div>
+          <div class="plan-period">per month</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">Start 1-Day Free Trial</div>
+    <div class="restore">Restore purchases</div>
+  </div>
+</div>
+</body>
+</html>

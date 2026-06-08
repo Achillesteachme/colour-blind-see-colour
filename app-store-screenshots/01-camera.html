@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    width: 1320px; height: 2868px;
+    background: linear-gradient(160deg, #0A0A0F 0%, #13102A 50%, #0A0A0F 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Background bokeh circles */
+  .bg-circle {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: 0.18;
+  }
+
+  /* Top headline */
+  .headline {
+    position: absolute;
+    top: 140px; left: 0; right: 0;
+    text-align: center;
+  }
+  .headline h1 {
+    font-size: 88px; font-weight: 800;
+    color: #fff; letter-spacing: -2px;
+    line-height: 1.05;
+  }
+  .headline h1 span { color: #7B61FF; }
+  .headline p {
+    margin-top: 28px;
+    font-size: 44px; font-weight: 400;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: -0.5px;
+  }
+
+  /* Phone frame */
+  .phone {
+    position: absolute;
+    bottom: -60px;
+    left: 50%; transform: translateX(-50%);
+    width: 780px; height: 1680px;
+    background: #1a1a1a;
+    border-radius: 88px;
+    box-shadow:
+      0 0 0 10px #2a2a2a,
+      0 0 0 14px #111,
+      0 80px 200px rgba(0,0,0,0.9),
+      0 0 120px rgba(123,97,255,0.15);
+  }
+  .phone-screen {
+    position: absolute;
+    top: 20px; left: 20px; right: 20px; bottom: 20px;
+    border-radius: 72px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  /* Camera scene inside phone */
+  .camera-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg,
+      #2D5A27 0%, #4A7C3F 20%,
+      #6B9E5E 40%, #3A6B8A 55%,
+      #5B8FAA 70%, #2A4A60 100%);
+    filter: saturate(2.2) hue-rotate(20deg) contrast(1.15) brightness(1.05);
+  }
+  .camera-scene {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 30% at 70% 25%, rgba(255,220,50,0.4) 0%, transparent 60%),
+      radial-gradient(ellipse 100% 40% at 50% 80%, rgba(0,0,0,0.5) 0%, transparent 100%);
+  }
+
+  /* Top UI overlay */
+  .cam-top {
+    position: absolute; top: 0; left: 0; right: 0; height: 200px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, transparent 100%);
+    display: flex; align-items: flex-start;
+    padding: 60px 40px 0;
+    justify-content: space-between;
+  }
+  .wordmark { color:#fff; font-size:38px; font-weight:700; letter-spacing:0.5px; }
+  .photo-count {
+    background: rgba(255,255,255,0.14);
+    border-radius: 40px; padding: 8px 20px;
+    color:#fff; font-size:30px;
+  }
+
+  .type-badge {
+    position: absolute; top: 160px; left: 40px;
+    background: rgba(123,97,255,0.3);
+    border: 2px solid rgba(123,97,255,0.5);
+    border-radius: 40px; padding: 8px 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .badge-dot { width:12px; height:12px; border-radius:6px; background:#7B61FF; }
+  .badge-text { color:rgba(255,255,255,0.85); font-size:28px; }
+
+  /* Bottom controls */
+  .cam-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 400px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+  }
+
+  .type-pills {
+    position: absolute; bottom: 230px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 18px;
+    padding: 0 40px;
+  }
+  .pill {
+    padding: 14px 32px; border-radius: 40px; font-size: 26px; font-weight: 600;
+    border: 2px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.08);
+  }
+  .pill.active {
+    background: #7B61FF;
+    border-color: #7B61FF;
+    color: #fff;
+  }
+
+  .capture-row {
+    position: absolute; bottom: 60px; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 80px;
+  }
+  .side-btn { text-align:center; }
+  .side-btn-label { color:rgba(255,255,255,0.65); font-size:24px; margin-top:8px; }
+
+  .capture-btn {
+    width: 160px; height: 160px; border-radius: 80px;
+    border: 8px solid #fff;
+    display: flex; align-items:center; justify-content:center;
+  }
+  .capture-inner {
+    width: 124px; height: 124px; border-radius: 62px;
+    background: #fff;
+  }
+
+  /* Library icon */
+  .lib-icon {
+    width: 60px; height: 48px; border-radius: 8px;
+    background: rgba(255,255,255,0.85); overflow:hidden;
+    position:relative;
+  }
+  .lib-band { height:18px; background:rgba(123,97,255,0.75); }
+  .lib-dots { display:flex; justify-content:center; gap:6px; padding:8px 0; }
+  .lib-dot { width:10px; height:10px; border-radius:5px; }
+
+  /* Sparkle icon */
+  .sparkle { position:relative; width:60px; height:60px; display:flex; align-items:center; justify-content:center; }
+  .sp-v { position:absolute; width:5px; height:52px; border-radius:3px; background:rgba(255,255,255,0.9); }
+  .sp-h { position:absolute; width:52px; height:5px; border-radius:3px; background:rgba(255,255,255,0.9); }
+  .sp-d1 { position:absolute; width:4px; height:32px; border-radius:2px; background:rgba(255,255,255,0.5); transform:rotate(45deg); }
+  .sp-d2 { position:absolute; width:4px; height:32px; border-radius:2px; background:rgba(255,255,255,0.5); transform:rotate(-45deg); }
+  .sp-dot { position:absolute; width:10px; height:10px; border-radius:5px; background:#fff; }
+
+  .tagline-cam {
+    position:absolute; bottom:16px; left:0; right:0;
+    text-align:center; color:rgba(255,255,255,0.35);
+    font-size:22px; font-style:italic;
+  }
+
+  /* Dynamic island */
+  .island {
+    position:absolute; top:18px; left:50%; transform:translateX(-50%);
+    width:200px; height:44px; background:#000; border-radius:22px;
+    z-index:10;
+  }
+</style>
+</head>
+<body>
+
+<!-- Background glow -->
+<div class="bg-circle" style="width:800px;height:800px;background:#7B61FF;top:-200px;left:-200px;"></div>
+<div class="bg-circle" style="width:600px;height:600px;background:#4ECDC4;bottom:400px;right:-100px;"></div>
+<div class="bg-circle" style="width:500px;height:500px;background:#FF6B6B;bottom:200px;left:-100px;"></div>
+
+<!-- Headline -->
+<div class="headline">
+  <h1>See colour<br/><span>like never before</span></h1>
+  <p>Live camera with real-time<br/>colour correction</p>
+</div>
+
+<!-- Phone -->
+<div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+
+    <!-- Camera background (green nature scene, colour corrected) -->
+    <div class="camera-bg"></div>
+    <div class="camera-scene"></div>
+
+    <!-- Top UI -->
+    <div class="cam-top">
+      <span class="wordmark">See Colour</span>
+      <span class="photo-count">12 photos</span>
+    </div>
+
+    <div class="type-badge">
+      <div class="badge-dot"></div>
+      <span class="badge-text">Red-Green (Deuteranopia)</span>
+    </div>
+
+    <!-- Bottom controls -->
+    <div class="cam-bottom">
+      <div class="type-pills">
+        <div class="pill active">Red-Green</div>
+        <div class="pill">Protanopia</div>
+        <div class="pill">Blue-Yellow</div>
+      </div>
+
+      <div class="capture-row">
+        <div class="side-btn">
+          <div class="lib-icon">
+            <div class="lib-band"></div>
+            <div class="lib-dots">
+              <div class="lib-dot" style="background:#FF6B6B"></div>
+              <div class="lib-dot" style="background:#51CF66"></div>
+              <div class="lib-dot" style="background:#339AF0"></div>
+            </div>
+          </div>
+          <div class="side-btn-label">Library</div>
+        </div>
+
+        <div class="capture-btn"><div class="capture-inner"></div></div>
+
+        <div class="side-btn">
+          <div class="sparkle">
+            <div class="sp-v"></div><div class="sp-h"></div>
+            <div class="sp-d1"></div><div class="sp-d2"></div>
+            <div class="sp-dot"></div>
+          </div>
+          <div class="side-btn-label">Memories</div>
+        </div>
+      </div>
+
+      <div class="tagline-cam">See colour like you're meant to.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

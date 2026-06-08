@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    width:1320px; height:2868px;
+    background: linear-gradient(160deg, #0A0A0F 0%, #1A0F2E 50%, #0A0A0F 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    overflow:hidden; position:relative;
+  }
+  .bg-circle { position:absolute; border-radius:50%; filter:blur(80px); opacity:0.15; }
+
+  .headline {
+    position:absolute; top:140px; left:0; right:0; text-align:center;
+  }
+  .headline h1 { font-size:88px; font-weight:800; color:#fff; letter-spacing:-2px; line-height:1.05; }
+  .headline h1 span { color:#7B61FF; }
+  .headline p { margin-top:28px; font-size:44px; color:rgba(255,255,255,0.5); }
+
+  .phone {
+    position:absolute; bottom:-60px;
+    left:50%; transform:translateX(-50%);
+    width:780px; height:1680px;
+    background:#1a1a1a; border-radius:88px;
+    box-shadow: 0 0 0 10px #2a2a2a, 0 0 0 14px #111,
+      0 80px 200px rgba(0,0,0,0.9), 0 0 120px rgba(123,97,255,0.15);
+  }
+  .phone-screen {
+    position:absolute; top:20px; left:20px; right:20px; bottom:20px;
+    border-radius:72px; overflow:hidden;
+    background:#0A0A0F;
+  }
+  .island {
+    position:absolute; top:18px; left:50%; transform:translateX(-50%);
+    width:200px; height:44px; background:#000; border-radius:22px; z-index:10;
+  }
+
+  /* Header bar */
+  .top-bar {
+    position:absolute; top:0; left:0; right:0; height:110px;
+    background:#0A0A0F;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    display:flex; align-items:flex-end; padding:0 40px 20px;
+    justify-content:space-between;
+  }
+  .back { color:#7B61FF; font-size:32px; }
+  .bar-title { color:#F0EFF5; font-size:34px; font-weight:600; }
+
+  /* Split comparison */
+  .compare-wrapper {
+    position:absolute; top:115px; left:30px; right:30px;
+    height:620px; border-radius:20px; overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .img-original {
+    position:absolute; inset:0;
+    background: linear-gradient(135deg, #7A3B3B 0%, #8B4513 25%, #5C8A3C 50%, #2E6B8A 75%, #4A3B6B 100%);
+    filter: saturate(0.4) brightness(0.85);
+  }
+  .img-corrected {
+    position:absolute; left:0; top:0; bottom:0; width:50%;
+    background: linear-gradient(135deg, #FF6B35 0%, #E8890A 25%, #51CF66 50%, #339AF0 75%, #9775FA 100%);
+    filter: saturate(2.2) hue-rotate(20deg) contrast(1.15);
+  }
+  .divider {
+    position:absolute; left:50%; top:0; bottom:0; width:4px;
+    background:#fff; transform:translateX(-50%);
+    box-shadow:0 0 20px rgba(255,255,255,0.8);
+  }
+  .divider-handle {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:44px; height:44px; border-radius:22px;
+    background:#fff; border:3px solid rgba(0,0,0,0.2);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.4);
+    color:#555; font-size:20px;
+  }
+  .label-original {
+    position:absolute; bottom:16px; right:16px;
+    background:rgba(0,0,0,0.65); border-radius:20px; padding:6px 18px;
+    color:rgba(255,255,255,0.8); font-size:24px;
+  }
+  .label-corrected {
+    position:absolute; bottom:16px; left:16px;
+    background:rgba(123,97,255,0.8); border-radius:20px; padding:6px 18px;
+    color:#fff; font-size:24px; font-weight:600;
+    display:flex; align-items:center; gap:8px;
+  }
+  .label-dot { width:10px; height:10px; border-radius:5px; background:#fff; }
+
+  /* Hold hint */
+  .hold-hint {
+    position:absolute; top:720px; left:0; right:0; text-align:center;
+    color:rgba(255,255,255,0.4); font-size:26px; font-style:italic;
+  }
+
+  /* Info box */
+  .info-box {
+    position:absolute; top:800px; left:30px; right:30px;
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
+    border-radius:16px; padding:28px 32px;
+  }
+  .info-label { color:rgba(255,255,255,0.4); font-size:22px; margin-bottom:6px; }
+  .info-type { color:#F0EFF5; font-size:32px; font-weight:700; margin-bottom:8px; }
+  .info-desc { color:rgba(255,255,255,0.5); font-size:24px; line-height:1.5; }
+
+  /* Type pills */
+  .section-label {
+    position:absolute; top:1010px; left:50px;
+    color:rgba(255,255,255,0.35); font-size:22px; font-weight:600; letter-spacing:2px;
+  }
+  .pills-row {
+    position:absolute; top:1060px; left:0; right:0;
+    display:flex; justify-content:center; gap:16px; padding:0 30px;
+  }
+  .type-pill {
+    padding:16px 32px; border-radius:40px; font-size:26px; font-weight:600;
+    border:2px solid rgba(255,255,255,0.15); color:rgba(255,255,255,0.55);
+    background:rgba(255,255,255,0.06);
+  }
+  .type-pill.active {
+    background:#7B61FF; border-color:#7B61FF; color:#fff;
+  }
+
+  /* Save button */
+  .save-btn {
+    position:absolute; top:1170px; left:30px; right:30px;
+    background:#7B61FF; border-radius:16px; padding:36px;
+    text-align:center; color:#fff; font-size:32px; font-weight:700;
+    box-shadow:0 8px 40px rgba(123,97,255,0.5);
+  }
+</style>
+</head>
+<body>
+<div class="bg-circle" style="width:700px;height:700px;background:#7B61FF;top:-100px;right:-200px;"></div>
+<div class="bg-circle" style="width:500px;height:500px;background:#FF6B6B;bottom:300px;left:-100px;"></div>
+
+<div class="headline">
+  <h1>Import any photo.<br/><span>See it corrected.</span></h1>
+  <p>Hold to compare with the original</p>
+</div>
+
+<div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+
+    <div class="top-bar">
+      <span class="back">‹ Back</span>
+      <span class="bar-title">Adjust Photo</span>
+      <span style="width:60px"></span>
+    </div>
+
+    <!-- Split image comparison -->
+    <div class="compare-wrapper">
+      <div class="img-original"></div>
+      <div class="img-corrected"></div>
+      <div class="divider">
+        <div class="divider-handle">⇄</div>
+      </div>
+      <div class="label-corrected"><div class="label-dot"></div> Red-Green</div>
+      <div class="label-original">Original</div>
+    </div>
+
+    <div class="hold-hint">Hold to see original · Release for corrected</div>
+
+    <div class="info-box">
+      <div class="info-label">Correcting for</div>
+      <div class="info-type">Red-Green (Deuteranopia)</div>
+      <div class="info-desc">Enhances green & red contrast so reds appear vivid and greens stand out clearly.</div>
+    </div>
+
+    <div class="section-label">SWITCH CORRECTION TYPE</div>
+    <div class="pills-row">
+      <div class="type-pill active">Red-Green</div>
+      <div class="type-pill">Protanopia</div>
+      <div class="type-pill">Blue-Yellow</div>
+    </div>
+
+    <div class="save-btn">Save to Memory Bank</div>
+  </div>
+</div>
+</body>
+</html>

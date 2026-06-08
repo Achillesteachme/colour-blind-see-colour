@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>App Store Screenshots — Colour Blind: See Colour</title>
+<style>
+  body { font-family: -apple-system, sans-serif; background:#111; color:#fff; padding:40px; }
+  h1 { font-size:28px; margin-bottom:8px; }
+  p { color:#888; margin-bottom:40px; }
+  .grid { display:flex; flex-wrap:wrap; gap:24px; }
+  .card {
+    background:#1a1a1a; border-radius:16px; overflow:hidden;
+    border:1px solid #333; width:280px;
+    text-decoration:none; color:inherit;
+    transition: transform 0.15s;
+  }
+  .card:hover { transform:scale(1.02); }
+  .card iframe { width:1320px; height:2868px; transform:scale(0.2122); transform-origin:top left; border:none; display:block; }
+  .frame-wrap { width:280px; height:608px; overflow:hidden; }
+  .card-label { padding:16px 20px; font-size:15px; font-weight:600; background:#222; }
+  .card-label span { color:#888; font-weight:400; font-size:13px; display:block; margin-top:2px; }
+  .instructions {
+    background:#1a1a2e; border:1px solid #7B61FF44; border-radius:12px;
+    padding:24px 28px; margin-bottom:40px; max-width:700px;
+  }
+  .instructions h2 { font-size:18px; color:#9B85FF; margin-bottom:12px; }
+  .instructions ol { padding-left:20px; color:#aaa; line-height:2; }
+  .instructions li strong { color:#fff; }
+</style>
+</head>
+<body>
+<h1>App Store Screenshots</h1>
+<p>Colour Blind: See Colour — 6.9" iPhone screenshots</p>
+
+<div class="instructions">
+  <h2>How to export each screenshot</h2>
+  <ol>
+    <li>Click a screenshot below to open it in a new tab</li>
+    <li>In Chrome: <strong>⌘ + Shift + P</strong> → type <strong>Capture full size screenshot</strong></li>
+    <li>This saves a 1320×2868px PNG — exactly the right App Store size</li>
+    <li>Upload to App Store Connect under <strong>App Store → Screenshots → iPhone 6.9"</strong></li>
+  </ol>
+</div>
+
+<div class="grid">
+  <a class="card" href="01-camera.html" target="_blank">
+    <div class="frame-wrap">
+      <iframe src="01-camera.html" scrolling="no"></iframe>
+    </div>
+    <div class="card-label">1 — Live Camera<span>Real-time colour correction</span></div>
+  </a>
+  <a class="card" href="02-photo-adjust.html" target="_blank">
+    <div class="frame-wrap">
+      <iframe src="02-photo-adjust.html" scrolling="no"></iframe>
+    </div>
+    <div class="card-label">2 — Photo Adjust<span>Import & compare photos</span></div>
+  </a>
+  <a class="card" href="03-gallery.html" target="_blank">
+    <div class="frame-wrap">
+      <iframe src="03-gallery.html" scrolling="no"></iframe>
+    </div>
+    <div class="card-label">3 — Memory Bank<span>Saved corrected moments</span></div>
+  </a>
+  <a class="card" href="04-paywall.html" target="_blank">
+    <div class="frame-wrap">
+      <iframe src="04-paywall.html" scrolling="no"></iframe>
+    </div>
+    <div class="card-label">4 — Subscription<span>Pricing & free trial</span></div>
+  </a>
+  <a class="card" href="05-types.html" target="_blank">
+    <div class="frame-wrap">
+      <iframe src="05-types.html" scrolling="no"></iframe>
+    </div>
+    <div class="card-label">5 — Correction Types<span>All three modes</span></div>
+  </a>
+</div>
+</body>
+</html>

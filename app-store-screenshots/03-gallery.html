@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    width:1320px; height:2868px;
+    background: linear-gradient(160deg, #0A0A0F 0%, #0F1A2E 50%, #0A0A0F 100%);
+    font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;
+    overflow:hidden; position:relative;
+  }
+  .bg-circle { position:absolute; border-radius:50%; filter:blur(80px); opacity:0.15; }
+
+  .headline {
+    position:absolute; top:140px; left:0; right:0; text-align:center;
+  }
+  .headline h1 { font-size:88px; font-weight:800; color:#fff; letter-spacing:-2px; line-height:1.05; }
+  .headline h1 span { color:#7B61FF; }
+  .headline p { margin-top:28px; font-size:44px; color:rgba(255,255,255,0.5); }
+
+  .phone {
+    position:absolute; bottom:-60px; left:50%; transform:translateX(-50%);
+    width:780px; height:1680px; background:#1a1a1a; border-radius:88px;
+    box-shadow:0 0 0 10px #2a2a2a,0 0 0 14px #111,
+      0 80px 200px rgba(0,0,0,0.9),0 0 120px rgba(123,97,255,0.15);
+  }
+  .phone-screen {
+    position:absolute; top:20px; left:20px; right:20px; bottom:20px;
+    border-radius:72px; overflow:hidden; background:#0A0A0F;
+  }
+  .island {
+    position:absolute; top:18px; left:50%; transform:translateX(-50%);
+    width:200px; height:44px; background:#000; border-radius:22px; z-index:10;
+  }
+
+  .top-bar {
+    position:absolute; top:0; left:0; right:0; height:110px;
+    background:#0A0A0F; border-bottom:1px solid rgba(255,255,255,0.08);
+    display:flex; align-items:flex-end; padding:0 40px 20px; justify-content:space-between;
+  }
+  .back { color:#7B61FF; font-size:32px; }
+  .bar-title { color:#F0EFF5; font-size:34px; font-weight:600; }
+
+  .count-badge {
+    background:rgba(123,97,255,0.2); border:1px solid rgba(123,97,255,0.35);
+    border-radius:20px; padding:6px 18px;
+    color:#9B85FF; font-size:24px; font-weight:600;
+  }
+
+  /* Grid */
+  .grid {
+    position:absolute; top:115px; left:0; right:0; bottom:0;
+    padding:12px;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap:6px;
+    overflow:hidden;
+  }
+
+  .photo-cell {
+    border-radius:12px; overflow:hidden;
+    position:relative;
+  }
+
+  /* Different colourful scenes */
+  .scene-1 { background:linear-gradient(135deg,#FF6B35,#E8890A,#51CF66); filter:saturate(2) hue-rotate(20deg); }
+  .scene-2 { background:linear-gradient(135deg,#339AF0,#7B61FF,#FF6B6B); filter:saturate(1.8) contrast(1.1); }
+  .scene-3 { background:linear-gradient(135deg,#51CF66,#20C997,#339AF0); filter:saturate(2.2); }
+  .scene-4 { background:linear-gradient(135deg,#FF6B6B,#F06595,#9775FA); filter:saturate(1.9) brightness(1.05); }
+  .scene-5 { background:linear-gradient(135deg,#FCC419,#FF6B35,#F03E3E); filter:saturate(2.5) hue-rotate(-10deg); }
+  .scene-6 { background:linear-gradient(135deg,#20C997,#4DABF7,#748FFC); filter:saturate(2); }
+  .scene-7 { background:linear-gradient(135deg,#9775FA,#CC5DE8,#F06595); filter:saturate(1.8); }
+  .scene-8 { background:linear-gradient(135deg,#E8890A,#FCC419,#A9E34B); filter:saturate(2.2) contrast(1.1); }
+  .scene-9 { background:linear-gradient(135deg,#4DABF7,#74C0FC,#A5D8FF); filter:saturate(1.9); }
+  .scene-10 { background:linear-gradient(135deg,#FF8787,#FF6B6B,#FAB005); filter:saturate(2.1) hue-rotate(5deg); }
+  .scene-11 { background:linear-gradient(135deg,#A9E34B,#74C0FC,#748FFC); filter:saturate(2); }
+  .scene-12 { background:linear-gradient(135deg,#CC5DE8,#7950F2,#4263EB); filter:saturate(1.8) brightness(1.1); }
+  .scene-13 { background:linear-gradient(135deg,#FFD43B,#FFA94D,#FF6B6B); filter:saturate(2.3); }
+  .scene-14 { background:linear-gradient(135deg,#63E6BE,#4DABF7,#4263EB); filter:saturate(1.9) contrast(1.15); }
+  .scene-15 { background:linear-gradient(135deg,#F783AC,#CC5DE8,#845EF7); filter:saturate(2); }
+
+  .photo-label {
+    position:absolute; bottom:6px; left:6px;
+    background:rgba(0,0,0,0.55); border-radius:8px; padding:3px 10px;
+    color:rgba(255,255,255,0.85); font-size:18px;
+  }
+</style>
+</head>
+<body>
+<div class="bg-circle" style="width:700px;height:700px;background:#7B61FF;top:-200px;left:-200px;"></div>
+<div class="bg-circle" style="width:500px;height:500px;background:#4ECDC4;bottom:300px;right:-100px;"></div>
+
+<div class="headline">
+  <h1>Your colour<br/><span>memory bank</span></h1>
+  <p>Every corrected moment,<br/>saved forever</p>
+</div>
+
+<div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+
+    <div class="top-bar">
+      <span class="back">‹ Camera</span>
+      <span class="bar-title">Memories</span>
+      <span class="count-badge">15 photos</span>
+    </div>
+
+    <div class="grid">
+      <div class="photo-cell scene-1"><div class="photo-label">Red-Green</div></div>
+      <div class="photo-cell scene-2"><div class="photo-label">Blue-Yellow</div></div>
+      <div class="photo-cell scene-3"><div class="photo-label">Red-Green</div></div>
+      <div class="photo-cell scene-4"><div class="photo-label">Protanopia</div></div>
+      <div class="photo-cell scene-5"><div class="photo-label">Red-Green</div></div>
+      <div class="photo-cell scene-6"><div class="photo-label">Blue-Yellow</div></div>
+      <div class="photo-cell scene-7"><div class="photo-label">Protanopia</div></div>
+      <div class="photo-cell scene-8"><div class="photo-label">Red-Green</div></div>
+      <div class="photo-cell scene-9"><div class="photo-label">Blue-Yellow</div></div>
+      <div class="photo-cell scene-10"><div class="photo-label">Red-Green</div></div>
+      <div class="photo-cell scene-11"><div class="photo-label">Protanopia</div></div>
+      <div class="photo-cell scene-12"><div class="photo-label">Blue-Yellow</div></div>
+      <div class="photo-cell scene-13"><div class="photo-label">Red-Green</div></div>
+      <div class="photo-cell scene-14"><div class="photo-label">Blue-Yellow</div></div>
+      <div class="photo-cell scene-15"><div class="photo-label">Protanopia</div></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

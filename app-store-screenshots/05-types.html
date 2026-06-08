@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    width:1320px; height:2868px;
+    background:linear-gradient(160deg,#0A0A0F 0%,#0D1A10 50%,#0A0A0F 100%);
+    font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;
+    overflow:hidden; position:relative;
+  }
+  .bg-circle{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.2;}
+
+  .headline{position:absolute;top:140px;left:0;right:0;text-align:center;}
+  .headline h1{font-size:88px;font-weight:800;color:#fff;letter-spacing:-2px;line-height:1.05;}
+  .headline h1 span{color:#7B61FF;}
+  .headline p{margin-top:28px;font-size:44px;color:rgba(255,255,255,0.5);}
+
+  .phone{
+    position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);
+    width:780px;height:1680px;background:#1a1a1a;border-radius:88px;
+    box-shadow:0 0 0 10px #2a2a2a,0 0 0 14px #111,
+      0 80px 200px rgba(0,0,0,0.9),0 0 120px rgba(123,97,255,0.12);
+  }
+  .phone-screen{
+    position:absolute;top:20px;left:20px;right:20px;bottom:20px;
+    border-radius:72px;overflow:hidden;background:#0A0A0F;
+  }
+  .island{
+    position:absolute;top:18px;left:50%;transform:translateX(-50%);
+    width:200px;height:44px;background:#000;border-radius:22px;z-index:10;
+  }
+
+  /* Big corrected photo */
+  .photo-main{
+    position:absolute;top:0;left:0;right:0;height:820px;
+    background:linear-gradient(160deg,#1A4A2A 0%,#2E7A3E 30%,#5BAA6A 55%,#3A7A9A 75%,#1A3A6A 100%);
+    filter:saturate(2.2) hue-rotate(20deg) contrast(1.15) brightness(1.05);
+  }
+  .photo-overlay{
+    position:absolute;top:0;left:0;right:0;height:820px;
+    background:linear-gradient(180deg,transparent 60%,rgba(10,10,15,1) 100%);
+  }
+
+  /* Type cards */
+  .type-cards{
+    position:absolute;top:750px;left:0;right:0;
+    display:flex;flex-direction:column;gap:18px;padding:0 30px;
+  }
+  .type-card{
+    border-radius:20px;padding:32px 36px;
+    display:flex;align-items:center;gap:28px;
+  }
+  .card-deuteranopia{
+    background:linear-gradient(135deg,rgba(123,97,255,0.25),rgba(168,85,247,0.15));
+    border:2px solid rgba(123,97,255,0.5);
+  }
+  .card-protanopia{
+    background:linear-gradient(135deg,rgba(255,107,53,0.15),rgba(255,107,107,0.1));
+    border:1px solid rgba(255,107,53,0.3);
+  }
+  .card-tritanopia{
+    background:linear-gradient(135deg,rgba(51,154,240,0.15),rgba(116,192,252,0.1));
+    border:1px solid rgba(51,154,240,0.3);
+  }
+
+  .card-icon{
+    width:72px;height:72px;border-radius:20px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:36px;flex-shrink:0;
+  }
+  .icon-d{background:rgba(123,97,255,0.3);}
+  .icon-p{background:rgba(255,107,53,0.3);}
+  .icon-t{background:rgba(51,154,240,0.3);}
+
+  .card-name{font-size:32px;font-weight:700;color:#F0EFF5;}
+  .card-sub{font-size:24px;color:rgba(255,255,255,0.5);margin-top:4px;}
+
+  .card-active-badge{
+    margin-left:auto;background:#7B61FF;
+    border-radius:20px;padding:8px 20px;
+    color:#fff;font-size:22px;font-weight:600;
+  }
+
+  /* Bottom bar with active type */
+  .bottom-bar{
+    position:absolute;bottom:0;left:0;right:0;height:180px;
+    background:rgba(10,10,15,0.95);
+    border-top:1px solid rgba(255,255,255,0.08);
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:12px;
+  }
+  .active-label{color:rgba(255,255,255,0.4);font-size:24px;}
+  .active-name{color:#fff;font-size:32px;font-weight:700;}
+  .colour-dots{display:flex;gap:12px;margin-top:4px;}
+  .cdot{width:14px;height:14px;border-radius:7px;}
+</style>
+</head>
+<body>
+<div class="bg-circle" style="width:600px;height:600px;background:#51CF66;top:-100px;right:-100px;"></div>
+<div class="bg-circle" style="width:500px;height:500px;background:#7B61FF;bottom:400px;left:-100px;"></div>
+<div class="bg-circle" style="width:400px;height:400px;background:#339AF0;bottom:200px;right:-50px;"></div>
+
+<div class="headline">
+  <h1>Three types.<br/><span>One app.</span></h1>
+  <p>Switch correction type<br/>instantly at any time</p>
+</div>
+
+<div class="phone">
+  <div class="phone-screen">
+    <div class="island"></div>
+
+    <!-- Full-bleed corrected photo -->
+    <div class="photo-main"></div>
+    <div class="photo-overlay"></div>
+
+    <!-- Type cards -->
+    <div class="type-cards">
+      <div class="type-card card-deuteranopia">
+        <div class="card-icon icon-d">🟢</div>
+        <div>
+          <div class="card-name">Red-Green</div>
+          <div class="card-sub">Deuteranopia · Most common</div>
+        </div>
+        <div class="card-active-badge">Active</div>
+      </div>
+
+      <div class="type-card card-protanopia">
+        <div class="card-icon icon-p">🔴</div>
+        <div>
+          <div class="card-name">Protanopia</div>
+          <div class="card-sub">Red-blind · Enhances reds</div>
+        </div>
+      </div>
+
+      <div class="type-card card-tritanopia">
+        <div class="card-icon icon-t">🔵</div>
+        <div>
+          <div class="card-name">Blue-Yellow</div>
+          <div class="card-sub">Tritanopia · Rare type</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="active-label">Currently correcting</div>
+      <div class="active-name">Red-Green (Deuteranopia)</div>
+      <div class="colour-dots">
+        <div class="cdot" style="background:#FF6B6B"></div>
+        <div class="cdot" style="background:#51CF66"></div>
+        <div class="cdot" style="background:#339AF0"></div>
+        <div class="cdot" style="background:#FCC419"></div>
+        <div class="cdot" style="background:#A855F7"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

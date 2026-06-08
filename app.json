@@ -1,13 +1,25 @@
 {
   "expo": {
-    "name": "chromasee",
-    "slug": "chromasee",
+    "name": "Colour Blind - See Colour",
+    "slug": "colour-blind-see-colour",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.colourblind.seecolour",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Colour Blind - See Colour uses your camera to apply colour correction in real time so you can see colours clearly.",
+        "NSPhotoLibraryAddUsageDescription": "Colour Blind - See Colour saves your corrected photos to your memory bank.",
+        "NSPhotoLibraryUsageDescription": "Colour Blind - See Colour reads photos from your library for colour correction."
+      },
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
