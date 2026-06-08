@@ -39,3 +39,12 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+build/
+node_modules/
+ios/build/
+android/build/
+*.xcarchive
+*.ipa
+*.dSYM
+puppeteer/
+
